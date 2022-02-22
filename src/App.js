@@ -1,3 +1,4 @@
+import "./App.css";
 import React from "react";
 
 class App extends React.Component {
@@ -18,25 +19,26 @@ class App extends React.Component {
     event.preventDefault();
     this.setState({
       recipes: [
+        ...this.state.recipes,
         {
           name: this.state.newRecipeName,
           instructions: this.state.newRecipeInstructions,
         },
       ],
     });
+    this.setState({ newRecipeName: "", newRecipeInstructions: "" });
   };
 
-  // handleRecipeNameChange = (event) => {
-  //   const value = event.target.value;
+  handleRecipeNameChange = (event) => {
+    const value = event.target.value;
+    this.setState({ newRecipeName: value });
+  };
 
-  //   this.setState({ newRecipeName: value });
-  // };
+  handleRecipeInstructionsChange = (event) => {
+    const value = event.target.value;
 
-  // handleRecipeInstructionsChange = (event) => {
-  //   const value = event.target.value;
-
-  //   this.setState({ newRecipeInstructions: value });
-  // };
+    this.setState({ newRecipeInstructions: value });
+  };
 
   handleChange = (event) => {
     const target = event.target;
@@ -68,6 +70,8 @@ class App extends React.Component {
       </form>
     );
 
+    const listItems = this.state.recipes.map((i) => <li>{i.name}</li>);
+
     return (
       <div className="App">
         <h1 className="App-header">My Recipes</h1>
@@ -79,9 +83,7 @@ class App extends React.Component {
           </button>
         )}
         {this.state.recipes.length > 0 ? (
-          <ul>
-            <li>{this.state.recipes[0].name}</li>
-          </ul>
+          <ul className="recipeItemList">{listItems}</ul>
         ) : (
           <p>There are no recipes to list.</p>
         )}
