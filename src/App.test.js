@@ -28,15 +28,15 @@ test("typing in the recipe name makes the recipe name appear in the input", asyn
   expect(screen.getByLabelText("Recipe name:").value).toEqual(recipeName);
 });
 
-const setup = () => {
-  const app = render(<App />);
+// const setup = () => {
+//   const app = render(<App />);
 
-  userEvent.click(app.getByText("Add Recipe"));
-  const instructionsInput = app.getByLabelText("Instructions:");
-  return {
-    instructionsInput,
-  };
-};
+//   userEvent.click(app.getByText("Add Recipe"));
+//   const instructionsInput = app.getByLabelText("Instructions:");
+//   return {
+//     instructionsInput,
+//   };
+// };
 
 test("typing in the recipe instructions makes the instructions appear in the form", async () => {
   const { instructionsInput } = setup();
@@ -52,10 +52,11 @@ const setup = () => {
   const app = render(<App />);
 
   userEvent.click(app.getByText("Add Recipe"));
+  const instructionsInput = app.getByLabelText("Instructions:");
 
   // Add the submit button to your setup method:
   const submitButton = app.getByRole("button");
-  const instructionsInput = app.getByLabelText("Instructions:");
+  //const instructionsInput = app.getByLabelText("Instructions:");
   const nameInput = app.getByLabelText("Recipe name:");
 
   return {
